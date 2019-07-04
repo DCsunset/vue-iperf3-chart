@@ -1,29 +1,34 @@
 # iperf3-plot
 
-## Project setup
+Plot iperf3 json data using Chart.js and Vue.js
+
+## Install and setup
+
+First clone this repository and install dependencies:
+
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+
+Then start the dev server to plot
+
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Usage
 
-### Run your tests
-```
-npm run test
-```
+Put the json data file in `src/data.json`.
 
-### Lints and fixes files
-```
-npm run lint
-```
+Then change the options of Chart.js in `App.vue`
+to have custom settings.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Screenshot
+
+![Screenshot](./Screenshot.png)
+
+## License
+
+MIT License
+
