@@ -1,60 +1,25 @@
 <template>
-  <div id="app">
-    <canvas id="chart"></canvas>
-  </div>
+	<div style="height: 95vh">
+		<chart :data="jsonData" :options="options" />
+	</div>
 </template>
 
 <script>
-import { parse } from './util/parse.js';
-import jsonData from './data.json';
-import Chart from 'chart.js';
+import jsonData from "./data.json";
+import Chart from "./components/Chart.vue";
 
 export default {
-  name: 'app',
-  mounted()
-  {
-    // id of canvas
-    const ctx = 'chart';
-    const data = parse(jsonData);
-    data.forEach(e => {
-      e.y /= 1024 * 1024;
-      return e;
-    });
-    const chart = new Chart(ctx, {
-      type: 'scatter',
-      data: {
-        datasets: [
-          {
-            label: 'Speed',
-            data: data.slice(1, 50),
-            showLine: true,
-            // Blue
-            borderColor: 'rgb(54, 162, 235)',
-            backgroundColor: 'rgba(54, 162, 235, 0.2)'
-          }
-        ]
-      },
-      options: {
-        scales: {
-          xAxes: [
-            {
-              scaleLabel: {
-                display: true,
-                labelString: 'Time / s'
-              }
-            }
-          ],
-          yAxes: [
-            {
-              scaleLabel: {
-                display: true,
-                labelString: 'Speed / Mbits/s'
-              }
-            }
-          ]
-        }
-      }
-    });
-  }
+	name: "app",
+	components: {
+		Chart
+	},
+	data() {
+		return {
+			jsonData,
+			options: {
+				maintainAspectRatio: false
+			}
+		};
+	}
 };
 </script>
