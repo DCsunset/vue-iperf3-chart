@@ -1,11 +1,10 @@
 {
-  "name": "iperf3-chart",
+  "name": "vue-iperf3-chart",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build:lib": "vue-cli-service build --target lib --name iperf3-chart --formats commonjs ./src/build-entry.js"
+    "build:lib": "vue-cli-service build --target lib --name vue-iperf3-chart --formats commonjs ./src/build-entry.js"
   },
   "files": [
     "dist/*",
@@ -16,13 +15,13 @@
     "Screenshot.png"
   ],
   "dependencies": {
-    "chart.js": "^2.8.0",
-    "core-js": "^2.6.5",
+    "chart.js": "^2.9.3",
+    "core-js": "^2.6.10",
     "vue": "^2.6.10"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.8.0",
-    "@vue/cli-service": "^3.8.0",
+    "@vue/cli-plugin-babel": "^3.12.1",
+    "@vue/cli-service": "^3.12.1",
     "vue-template-compiler": "^2.6.10"
   }
 }
