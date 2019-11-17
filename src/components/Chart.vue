@@ -36,6 +36,14 @@ export default {
 		unit: {
 			type: String,
 			default: "Mbits"
+		},
+		start: {
+			type: Number,
+			default: 0
+		},
+		end: {
+			type: Number,
+			default: -1
 		}
 	},
 	mounted() {
@@ -52,7 +60,7 @@ export default {
 				datasets: [
 					{
 						label: "Speed",
-						data: data.slice(1, 50),
+						data: data.slice(this.start, this.end),
 						showLine: true,
 						// Blue
 						borderColor: "rgb(54, 162, 235)",
