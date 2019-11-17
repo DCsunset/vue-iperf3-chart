@@ -62,7 +62,6 @@ export default {
 				]
 			},
 			options: {
-				...this.options,
 				scales: {
 					xAxes: [
 						{
@@ -80,7 +79,8 @@ export default {
 							}
 						}
 					]
-				}
+				},
+				...this.options
 			}
 		});
 	}
