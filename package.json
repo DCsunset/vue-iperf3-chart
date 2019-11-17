@@ -1,5 +1,18 @@
 {
   "name": "vue-iperf3-chart",
+  "author": "DCsunset",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DCsunset/vue-iperf3-chart"
+  },
+  "keywords": [
+    "vue",
+    "chart.js",
+    "iperf3"
+  ],
+  "description": "A Vue component to plot iperf3 json data",
+  "main": "./dist/vue-iper3-chart.common.js",
   "version": "0.1.0",
   "scripts": {
     "serve": "vue-cli-service serve",
