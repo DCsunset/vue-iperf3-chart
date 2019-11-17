@@ -55,6 +55,8 @@ it changes as well.
 | data    | Object | `undefined` | iperf3 json data                                  |
 | options | Object | `undefined` | options passed to Chart.js                        |
 | unit    | String | `"Mbits"`   | The unit can be `"Kbits"`, `"Mbits"` or `"Gbits"` |
+| start   | Number | `0`         | The starting interval in data                     |
+| end     | Number | `-1`        | The ending interval in data (-1 means the end)    |
 
 
 ## Test
