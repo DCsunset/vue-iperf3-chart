@@ -29,7 +29,6 @@ export default {
 			type: Object,
 			default: undefined
 		},
-		// options except scales
 		options: {
 			type: Object,
 			default: undefined
