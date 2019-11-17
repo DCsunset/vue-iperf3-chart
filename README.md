@@ -1,6 +1,10 @@
 # vue-iperf3-chart
 
-Plot iperf3 json data using Chart.js and Vue.js
+[![npm](https://img.shields.io/npm/v/vue-iperf3-chart.svg)](https://www.npmjs.com/package/vue-iperf3-chart)
+[![npm](https://img.shields.io/npm/dm/vue-iperf3-chart.svg)](https://www.npmjs.com/package/vue-iperf3-chart)
+[![GitHub](https://img.shields.io/github/license/DCsunset/vue-iperf3-chart.svg?color=blue)](https://github.com/DCsunset/vue-iperf3-chart/blob/master/LICENSE)
+
+A Vue component to plot iperf3 json data.
 
 ## Install
 
@@ -40,7 +44,7 @@ export default {
 </script>
 ```
 
-The iperf3 chart's height depends on its parent node.
+The iperf3 chart's height and width depend on its parent node.
 When the size of its parent node changes,
 it changes as well.
 
