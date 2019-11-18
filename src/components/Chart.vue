@@ -15,6 +15,8 @@
 <script>
 import { parse } from "../util/parse.js";
 import Chart from "chart.js";
+// import it to work
+import "chartjs-plugin-annotation";
 
 const unitMap = {
 	Gbits: 1e9,
@@ -46,29 +48,55 @@ export default {
 			default: -1
 		}
 	},
+
+	watch: {
+		// Rerender after updating
+		data() {
+			this.render();
+		}
+	},
+
 	mounted() {
-		// id of canvas
-		const ctx = "chart";
-		const data = parse(this.data);
-		data.forEach(e => {
-			e.y /= unitMap[this.unit];
-			return e;
-		});
-		const chart = new Chart(ctx, {
-			type: "scatter",
-			data: {
+		this.render();
+	},
+
+	methods: {
+		render() {
+			// id of canvas
+			const ctx = "chart";
+			const parsedData = parse(this.data);
+			const { intervals, sum } = parsedData;
+
+			// emit parsed data
+			this.$emit("parsed", parsedData);
+
+			const speed = `${this.unit}/s`;
+
+			intervals.forEach(e => {
+				e.y /= unitMap[this.unit];
+				return e;
+			});
+
+			intervals.unshift({ x: 0, y: 0 });
+
+			sum.received /= unitMap[this.unit];
+			sum.sent /= unitMap[this.unit];
+			console.log(sum);
+
+			const data = {
 				datasets: [
 					{
-						label: "Speed",
-						data: data.slice(this.start, this.end),
+						label: `Speed`,
+						data: intervals.slice(this.start, this.end),
 						showLine: true,
 						// Blue
 						borderColor: "rgb(54, 162, 235)",
 						backgroundColor: "rgba(54, 162, 235, 0.2)"
 					}
 				]
-			},
-			options: {
+			};
+
+			const options = {
 				scales: {
 					xAxes: [
 						{
@@ -82,14 +110,53 @@ export default {
 						{
 							scaleLabel: {
 								display: true,
-								labelString: `Speed / ${this.unit}/s`
+								labelString: `Speed / ${speed}`
+							}
+						}
+					]
+				},
+				annotation: {
+					annotations: [
+						{
+							drawTime: "afterDatasetsDraw",
+							id: "sum_received",
+							type: "line",
+							mode: "horizontal",
+							scaleID: "y-axis-1",
+							borderColor: "green",
+							borderWidth: 1,
+							value: sum.received,
+							label: {
+								enabled: true,
+								position: "right",
+								content: `Average received: ${sum.received} ${speed}`
+							}
+						},
+						{
+							id: "sum_sent",
+							type: "line",
+							mode: "horizontal",
+							scaleID: "y-axis-1",
+							borderColor: "purple",
+							borderWidth: 1,
+							value: sum.sent,
+							label: {
+								enabled: true,
+								position: "right",
+								content: `Average sent: ${sum.sent} ${speed}`
 							}
 						}
 					]
 				},
 				...this.options
-			}
-		});
+			};
+
+			const chart = new Chart(ctx, {
+				type: "scatter",
+				data,
+				options
+			});
+		}
 	}
 };
 </script>
