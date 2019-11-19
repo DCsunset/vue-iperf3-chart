@@ -166,7 +166,7 @@ export default {
 							label: {
 								enabled: true,
 								position: "right",
-								content: `Average: ${average} ${speed}`
+								content: `${index} average: ${average}`
 							}
 						};
 					})
