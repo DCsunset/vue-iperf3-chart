@@ -168,7 +168,9 @@ export default {
 							label: {
 								enabled: true,
 								position: "right",
-								content: `${index} average: ${average}`
+								content: `${
+									this.labels ? this.labels[index] : index
+								} average: ${average}`
 							}
 						};
 					})
