@@ -14,7 +14,8 @@ npm install vue-iperf3-chart
 
 ## Usage
 
-First import the package and then use it as a Vue Component:
+First import the package and **css**,
+and then use it as a Vue Component:
 
 ```html
 <template>
@@ -25,7 +26,8 @@ First import the package and then use it as a Vue Component:
 
 <script>
 import jsonData from "./data.json";
-import Chart from "./components/Chart.vue";
+import Chart from "vue-iperf3-chart";
+import "vue-iperf3-chart/dist/vue-iperf3-chart.css";
 
 export default {
 	name: "app",
