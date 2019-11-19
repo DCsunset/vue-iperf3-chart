@@ -20,7 +20,12 @@ and then use it as a Vue Component:
 ```html
 <template>
 	<div style="height: 95vh">
-		<chart :data="jsonData" :options="options" />
+		<chart
+			:data="jsonData"
+			:labels="labels"
+			:options="options"
+			:fillAlpha="0.3"
+		/>
 	</div>
 </template>
 
@@ -37,6 +42,7 @@ export default {
 	data() {
 		return {
 			jsonData,
+			labels: ["Label 1", "Label 2"],
 			options: {
 				maintainAspectRatio: false
 			}

@@ -69,6 +69,10 @@ export default {
 		fillAlpha: {
 			type: Number,
 			default: 0.5
+		},
+		labels: {
+			type: Array,
+			default: undefined
 		}
 	},
 
@@ -108,7 +112,7 @@ export default {
 
 			const data = {
 				datasets: parsedData.map((e, index) => ({
-					label: `${index}`,
+					label: this.labels ? this.labels[index] : `${index}`,
 					data: e.intervals.slice(this.start, this.end),
 					showLine: true
 				}))
