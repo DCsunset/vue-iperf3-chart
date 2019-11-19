@@ -48,6 +48,10 @@ The iperf3 chart's height and width depend on its parent node.
 When the size of its parent node changes,
 it changes as well.
 
+The chart's data is also responsive.
+When the data changes,
+the chart will be refreshed.
+
 ## Props
 
 | Prop    | Type   | Default     | Description                                       |
@@ -57,6 +61,15 @@ it changes as well.
 | unit    | String | `"Mbits"`   | The unit can be `"Kbits"`, `"Mbits"` or `"Gbits"` |
 | start   | Number | `0`         | The starting interval in data                     |
 | end     | Number | `-1`        | The ending interval in data (-1 means the end)    |
+
+
+## Events
+
+| Event  | Argument    | Description                                  |
+| ------ | ----------- | -------------------------------------------- |
+| parsed | Parsed data | When data changes, the event will be emitted |
+
+
 
 
 ## Test
