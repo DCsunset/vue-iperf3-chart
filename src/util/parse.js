@@ -2,7 +2,6 @@ export function parse(jsonData) {
 	const data = jsonData;
 	const intervals = data.intervals;
 	const start = data.start;
-	const end = data.end;
 
 	return {
 		intervals: intervals.map(e => {
@@ -11,14 +10,11 @@ export function parse(jsonData) {
 				y: e.sum.bits_per_second
 			};
 		}),
-		sum: {
-			sent: end.sum_sent.bits_per_second,
-			received: end.sum_received.bits_per_second
-		},
 		meta: {
 			protocol: start.test_start.protocol,
 			version: start.version,
-			system_info: start.system_info
+			system_info: start.system_info,
+			timestamp: start.timestamp.time
 		}
 	};
 };

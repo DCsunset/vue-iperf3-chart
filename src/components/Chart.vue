@@ -15,8 +15,23 @@
 <script>
 import { parse } from "../util/parse.js";
 import Chart from "chart.js";
-// import it to work
+
+// import plugins
 import "chartjs-plugin-annotation";
+import "chartjs-plugin-colorschemes";
+
+// Color schemes
+import colorSchemes from "chartjs-plugin-colorschemes/src/colorschemes";
+
+function getScheme(scheme) {
+	let arr, category;
+
+	arr = scheme.split(".");
+	category = colorSchemes[arr[0]];
+	if (category) {
+		return category[arr[1]];
+	}
+}
 
 const unitMap = {
 	Gbits: 1e9,
@@ -28,7 +43,7 @@ export default {
 	props: {
 		// json format
 		data: {
-			type: Object,
+			type: Array,
 			default: undefined
 		},
 		options: {
@@ -46,6 +61,14 @@ export default {
 		end: {
 			type: Number,
 			default: -1
+		},
+		colorScheme: {
+			type: String,
+			default: "tableau.ClassicMedium10"
+		},
+		fillAlpha: {
+			type: Number,
+			default: 0.5
 		}
 	},
 
@@ -64,39 +87,42 @@ export default {
 		render() {
 			// id of canvas
 			const ctx = "chart";
-			const parsedData = parse(this.data);
-			const { intervals, sum } = parsedData;
+			const parsedData = this.data.map(data => parse(data));
 
 			// emit parsed data
 			this.$emit("parsed", parsedData);
 
 			const speed = `${this.unit}/s`;
 
-			intervals.forEach(e => {
-				e.y /= unitMap[this.unit];
-				return e;
+			parsedData.forEach(data => {
+				const { intervals, sum } = data;
+				intervals.forEach(e => {
+					e.y /= unitMap[this.unit];
+					return e;
+				});
+
+				// add start point
+				intervals.unshift({ x: 0, y: 0 });
 			});
 
-			// add start point
-			intervals.unshift({ x: 0, y: 0 });
-
-			sum.received /= unitMap[this.unit];
-			sum.sent /= unitMap[this.unit];
+			// Color scheme
+			const scheme = getScheme(this.colorScheme);
 
 			const data = {
-				datasets: [
-					{
-						label: `Speed`,
-						data: intervals.slice(this.start, this.end),
-						showLine: true,
-						// Blue
-						borderColor: "rgb(54, 162, 235)",
-						backgroundColor: "rgba(54, 162, 235, 0.2)"
-					}
-				]
+				datasets: parsedData.map((e, index) => ({
+					label: `${index}`,
+					data: e.intervals.slice(this.start, this.end),
+					showLine: true
+				}))
 			};
 
 			const options = {
+				plugins: {
+					colorschemes: {
+						scheme: this.colorScheme,
+						fillAlpha: this.fillAlpha
+					}
+				},
 				scales: {
 					xAxes: [
 						{
@@ -116,37 +142,34 @@ export default {
 					]
 				},
 				annotation: {
-					annotations: [
-						{
+					annotations: this.data.map((e, index) => {
+						const data = e.intervals.slice(this.start, this.end);
+						if (data.length <= 1) return {};
+
+						const start = data[0];
+						const end = data[data.length - 1];
+
+						const sum =
+							(data.reduce((acc, cur) => acc + cur.sum.bytes, 0) * 8) /
+							unitMap[this.unit];
+						const average = sum / (end.sum.end - start.sum.start);
+
+						return {
 							drawTime: "afterDatasetsDraw",
-							id: "sum_received",
+							id: `average-${index}`,
 							type: "line",
 							mode: "horizontal",
 							scaleID: "y-axis-1",
-							borderColor: "green",
 							borderWidth: 1,
-							value: sum.received,
+							borderColor: scheme[index % scheme.length],
+							value: average,
 							label: {
 								enabled: true,
 								position: "right",
-								content: `Average received: ${sum.received} ${speed}`
+								content: `Average: ${average} ${speed}`
 							}
-						},
-						{
-							id: "sum_sent",
-							type: "line",
-							mode: "horizontal",
-							scaleID: "y-axis-1",
-							borderColor: "purple",
-							borderWidth: 1,
-							value: sum.sent,
-							label: {
-								enabled: true,
-								position: "right",
-								content: `Average sent: ${sum.sent} ${speed}`
-							}
-						}
-					]
+						};
+					})
 				},
 				...this.options
 			};

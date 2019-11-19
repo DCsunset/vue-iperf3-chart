@@ -1,6 +1,6 @@
 <template>
 	<div style="height: 95vh">
-		<chart :data="jsonData" :options="options" />
+		<chart :data="jsonData" :options="options" :fillAlpha="0.3" />
 	</div>
 </template>
 
