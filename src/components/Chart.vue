@@ -1,6 +1,6 @@
 <template>
 	<div class="chart-container">
-		<canvas id="chart"></canvas>
+		<canvas ref="chart"></canvas>
 	</div>
 </template>
 
@@ -85,8 +85,6 @@ export default {
 
 	methods: {
 		render() {
-			// id of canvas
-			const ctx = "chart";
 			const parsedData = this.data.map(data => parse(data));
 
 			// emit parsed data
@@ -174,7 +172,7 @@ export default {
 				...this.options
 			};
 
-			const chart = new Chart(ctx, {
+			const chart = new Chart(this.$refs.chart.getContext("2d"), {
 				type: "scatter",
 				data,
 				options
