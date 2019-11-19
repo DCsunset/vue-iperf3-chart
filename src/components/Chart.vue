@@ -77,11 +77,11 @@ export default {
 				return e;
 			});
 
+			// add start point
 			intervals.unshift({ x: 0, y: 0 });
 
 			sum.received /= unitMap[this.unit];
 			sum.sent /= unitMap[this.unit];
-			console.log(sum);
 
 			const data = {
 				datasets: [
