@@ -54,13 +54,15 @@ the chart will be refreshed.
 
 ## Props
 
-| Prop    | Type   | Default     | Description                                       |
-| ------- | ------ | ----------- | ------------------------------------------------- |
-| data    | Object | `undefined` | iperf3 json data                                  |
-| options | Object | `undefined` | options passed to Chart.js                        |
-| unit    | String | `"Mbits"`   | The unit can be `"Kbits"`, `"Mbits"` or `"Gbits"` |
-| start   | Number | `0`         | The starting interval in data                     |
-| end     | Number | `-1`        | The ending interval in data (-1 means the end)    |
+| Prop        | Type   | Default                     | Description                                                                                                                       |
+| ----------- | ------ | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| data        | Array  | `undefined`                 | An array of iperf3 json data                                                                                                      |
+| options     | Object | `undefined`                 | options passed to Chart.js                                                                                                        |
+| unit        | String | `"Mbits"`                   | The unit can be `"Kbits"`, `"Mbits"` or `"Gbits"`                                                                                 |
+| start       | Number | `0`                         | The starting interval in data                                                                                                     |
+| end         | Number | `-1`                        | The ending interval in data (-1 means the end)                                                                                    |
+| fillAlpha   | Number | `0.5`                       | The background alpha channel of each line                                                                                         |
+| colorScheme | String | `"tableau.ClassicMedium10"` | The color scheme used in `chartjs-plugin-colorschemes`. It can be picked at <https://nagix.github.io/chartjs-plugin-colorschemes> |
 
 
 ## Events
@@ -68,7 +70,6 @@ the chart will be refreshed.
 | Event  | Argument    | Description                                  |
 | ------ | ----------- | -------------------------------------------- |
 | parsed | Parsed data | When data changes, the event will be emitted |
-
 
 
 
