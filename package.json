@@ -13,7 +13,7 @@
   ],
   "description": "A Vue component to plot iperf3 json data",
   "main": "./dist/vue-iper3-chart.common.js",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
