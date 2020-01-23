@@ -1,24 +1,14 @@
 {
   "name": "vue-iperf3-chart",
-  "author": "DCsunset",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DCsunset/vue-iperf3-chart"
-  },
-  "keywords": [
-    "vue",
-    "chart.js",
-    "iperf3"
-  ],
-  "description": "A Vue component to plot iperf3 json data",
-  "main": "./dist/vue-iperf3-chart.common.js",
   "version": "1.1.1",
+  "description": "A Vue component to plot iperf3 json data",
+  "author": "DCsunset",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build:lib": "vue-cli-service build --target lib --name vue-iperf3-chart --formats commonjs ./src/build-entry.js"
   },
+  "main": "./dist/vue-iperf3-chart.common.js",
   "files": [
     "dist/*",
     "src/components/*.vue",
@@ -31,12 +21,22 @@
     "chart.js": "^2.9.3",
     "chartjs-plugin-annotation": "^0.5.7",
     "chartjs-plugin-colorschemes": "^0.4.0",
-    "core-js": "^2.6.11",
+    "core-js": "^3.4.4",
     "vue": "^2.6.11"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.12.1",
-    "@vue/cli-service": "^3.12.1",
+    "@vue/cli-plugin-babel": "^4.1.2",
+    "@vue/cli-service": "^4.1.2",
     "vue-template-compiler": "^2.6.11"
+  },
+  "keywords": [
+    "vue",
+    "chart.js",
+    "iperf3"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DCsunset/vue-iperf3-chart"
   }
 }
