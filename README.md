@@ -65,6 +65,7 @@ the chart will be refreshed.
 | Prop        | Type   | Default                     | Description                                                                                                                       |
 | ----------- | ------ | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | data        | Array  | `undefined`                 | An array of iperf3 json data                                                                                                      |
+| labels | Array | `undefined` | An array of labels of data. The length should be the same as data's |
 | options     | Object | `undefined`                 | options passed to Chart.js                                                                                                        |
 | unit        | String | `"Mbits"`                   | The unit can be `"Kbits"`, `"Mbits"` or `"Gbits"`                                                                                 |
 | start       | Number | `0`                         | The starting interval in data                                                                                                     |
